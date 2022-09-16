@@ -850,11 +850,15 @@ class ANALYSIS:
         return templete
 
     def Limit_Run(self,):
-        for iop in self.limit_parameter:
+        # loop over All the aQGC parameters
+        for iop in self.limit_parameter :
             if iop == "SM" : continue
+            # create dir for each operator
             self.Limit_Path_iop = "%s/Limit_%s/%s/"%(self.PlotPath,self.LimitFolder_PostFix,iop)
             self.Limit_CreateDir(iop)
+            # create histogram needed for parameters
             rootfile = self.Limit_CreateRootfile(iop)
+            # create data cards and run scripts
             self.Limit_Datacard_Commands(iop,rootfile)
 
     def Limit_NameMap(self,iop):
@@ -2370,7 +2374,7 @@ ar_R{isignal} = TArrow( V{isignal}[3] ,MaxY*arrposition, V{isignal}[3]-length, M
         outf.Close()
 
         if self.run_limit : 
-        # create datacard and commmands
+            # create datacard and commmands
             self.Limit_Run()
             cutname = kwargs.get("cutname","PS")
             self.Limit_Table(cutname)
